@@ -1,51 +1,53 @@
-## Laravel Challenge
+# Laravel Challenge
 
-Refactor the nasty codes of the current project. Feel free to make any necessary adjustments.
+#### 1. api/login
 
-### TODO
+*Used at login.*
+<br> 
+Do all the tasks below:
 
-1. api/login
+- Rewrite the code for request validation
+- Refine the code for user credentials
+- Implement code with Resources
 
-`` Login ဝင်ရာတွင်အသုံးပြုသည်။ အောက်ပါလုပ်ဆောင်ချက်များကိုပြုလုပ်ပါ။ ``
+#### 2. api/posts
 
-- [ ] Request validate လုပ်ထားသည်များကိုပြင်ဆင်ပေးရန်။ 
-- [ ] User credentials ကို ပိုမိုအဆင်ပြေစွာစစ်ဆေးရန်။
-- [ ] Resource သုံးပေးရန်။
+*Fetch posts listing.* 
+<br> 
+Do the following tasks:
 
-2. api/posts
+- To optimize the query
+- to use Resource
+#### 3. api/posts/reaction
 
-`` Posts များကို list အလိုက်ဆွဲထုတ်ထားခြင်းဖြစ်သည်။ အောက်ပါလုပ်ဆောင်ချက်များကိုလုပ်ပါ။ ``
+*Used for like or unlike a post after login.* 
+<br> 
+Do the following tasks:
 
-- [ ] Query optimization ပြုလုပ်ပေးရန်။
-- [ ] Resource သုံးပေးရန်။
+- Change the coding style for request validation
+- Refactor the code for Like (or) Unlike to get better result
 
-3. api/posts/reaction
+#### 4. Wifi Calculator
+1. api/mpt/invoice-amount
+2. api/ooredoo/invoice-amount
 
-`` login ဝင်ပြီးနောက် post တခုခုကို like, unlike ပြုလုပ်နိုင်သည်။ ``
+*Wifi Monthly Payment Calculator*
+<br>
+Do the following tasks:
+- Implement code for wifi calculator following the rules for SOLID design principle
 
-- [ ] Request validation ကိုပုံစံပြောင်းရေးပေးရန်။
-- [ ] Like (or) unlike ပြုလုပ်ခြင်းကို ပိုမိုကောင်းမွန်အောင်ရေးပေးရန်။ 
-
-4. Wifi Calculator
-- api/mpt/invoice-amount
-- api/ooredoo/invoice-amount
-
-`` wifi လစဉ်ကြေးတွက်သော calculator ဖြစ်သည်။ ``
-
-- [ ] SOLID ဖြစ်အောင် ပြင်ရေးပေးပါ။
-
-5. HR
+#### 5. HR
 - api/apply-job
 - api/staff/salary
 
-`` အလုပ်လျောက်ခြင်းနှင့် ဝန်ထမ်းများကို လစာပေးသော APIs ဖြစ်သည်။ ``
+*API for apply jobs*
+<br>
+Do the following tasks:
 
-- [ ] Usage မှားနေသော code များကိုပြင်ပါ။
+- Fix the wrong usage code
 
-### Notes
-- ယခု project သည် business flows ကိုထပ်မံပြည့်စုံအောင်လုပ်စရာမလိုပါ။
-- Coding skill ကိုသာ အဓိကထားသည်။
-- အထက်ပါလုပ်ဆောင်ရန်များတွင်မပါသော ကိစ္စများကိုပြုပြင်ထားလျှင် Bonus points အဖြစ်ထည့်သွင်းစဉ်းစားမည်။
+### ** Notes **
 
-### APIs
-https://documenter.getpostman.com/view/18668231/UVeAu8JF
+- This project is not for business flows. You don't need to consider for that
+- This project is intended for **Coding Skill** only.
+- You can improve your code as much as you can, we will consider as bonus points.
