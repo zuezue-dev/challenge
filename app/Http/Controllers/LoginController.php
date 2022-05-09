@@ -3,58 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use App\Http\Requests\LoginRequest;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
+    protected $user;
+    public function login(LoginRequest $request)
     {
-        if (!$request->email) {
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+        if ($this->attempt($credentials)) {
+            $user = $this->user;
             return response()->json([
-                'status'  => 422,
-                'message' => 'email is required'
-            ]);
+                'user' =>  new UserResource($user),
+                'token' => $user->createToken('User-Token')->plainTextToken], Response::HTTP_OK);
+        } else {
+            return response()->json(['message' => 'Invalid Credentials'], Response::HTTP_UNAUTHORIZED);
         }
-        
-        if(strlen($request->email) < 6) {
-            return response()->json([
-                'status'  => 422,
-                'message' => 'email is invalid'
-            ]);
+    }
+
+    /**
+     * create a check method for api login
+     */
+    public function attempt($credentials)
+    {
+        $email    =  Arr::get($credentials, 'email');
+        $password =  Arr::get($credentials, 'password');
+        $user     =  User::where('email', $email)->first();
+ 
+        if ($user) {
+            $this->user = $user;
+            return Hash::check($password, $user->password);
         }
-    
-        if (!$request->password) {
-            return response()->json([
-                'status'  => 422,
-                'message' => 'password is required'
-            ]);
-        }
-        if(strlen($request->password) < 8) {
-            return response()->json([
-                'status'  => 422,
-                'message' => 'password is invalid'
-            ]);
-        }
-    
-        $user = User::where('email', $request->email)->first();
-        if (!$user) {
-            return response()->json([
-                'status'  => 404,
-                'message' => 'Model not found.'
-            ]);
-        }
-    
-        if (!Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'status'  => 404,
-                'message' => 'Invalid credentials'
-            ]);
-        }
-        
-        return response()->json([
-            'user' => $user,
-            'token' => $user->createToken('User-Token')->plainTextToken
-        ]);
+        return false;
     }
 }
