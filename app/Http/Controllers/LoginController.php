@@ -12,6 +12,11 @@ use Symfony\Component\HttpFoundation\Response;
 class LoginController extends Controller
 {
     protected $user;
+    /**
+     * Authenticate User 
+     * 
+     * @return JSON
+     */
     public function login(LoginRequest $request)
     {
         $credentials = [

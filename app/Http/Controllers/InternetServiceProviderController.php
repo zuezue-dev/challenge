@@ -8,22 +8,23 @@ use Illuminate\Http\Request;
 
 class InternetServiceProviderController extends Controller
 {
-    public function getMptInvoiceAmount(Request $request)
+    protected $operator;
+
+    public function getInvoiceAmount(Request $request, $operatorName)
     {
-        $mpt = new Mpt();
-        $mpt->setMonth($request->get('month') ?: 1);
-        $amount = $mpt->calculateTotalAmount();
-        
-        return response()->json([
-            'data' => $amount
-        ]);
-    }
-    
-    public function getOoredooInvoiceAmount(Request $request)
-    {
-        $ooredoo = new Ooredoo();
-        $ooredoo->setMonth($request->get('month') ?: 1);
-        $amount = $ooredoo->calculateTotalAmount();
+        switch($operatorName) {
+            case 'ooredoo': 
+                $this->operator = new Ooredoo();
+                break;
+            case 'mpt': 
+                $this->operator = new Mpt();
+                break;
+            default:
+                throw new \Exception('Operator Name not supported');
+        }
+       
+        $this->operator->setMonth($request->get('month') ?: 1);
+        $amount = $this->operator->calculateTotalAmount();
         
         return response()->json([
             'data' => $amount
